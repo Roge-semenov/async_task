@@ -27,6 +27,8 @@ func RunPipeline(cmds ...cmd) {
 	}
 
 	close(channels[0])
+	//
+	//
 	wg.Wait()
 }
 
@@ -34,9 +36,7 @@ func SelectUsers(in, out chan interface{}) {
 	seenUsers := make(map[uint64]struct{})
 	for rawEmail := range in {
 		email, ok := rawEmail.(string)
-		if !ok {
-			continue
-		}
+		if !ok {continue}
 
 		user := GetUser(email)
 		if _, exists := seenUsers[user.ID]; !exists {
